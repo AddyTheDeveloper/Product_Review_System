@@ -1,0 +1,70 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 2rem;
+}
+
+.heroContent {
+    text-align: center;
+    z-index: 10;
+    max-width: 800px;
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+}
+
+.highlight {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-muted);
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ctaGroup {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* Background Blobs */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    z-index: -1;
+    animation: float 10s infinite ease-in-out;
+}
+
+.blob1 {
+    width: 400px;
+    height: 400px;
+    background: var(--color-primary);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.blob2 {
+    width: 500px;
+    height: 500px;
+    background: var(--color-secondary);
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -5s;
+}

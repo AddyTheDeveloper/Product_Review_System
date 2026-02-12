@@ -1,0 +1,108 @@
+/* Glass Panel Utilities */
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: var(--radius-lg);
+}
+
+.glass-card {
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border-radius: var(--radius-lg);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transition: 0.5s;
+}
+
+.glass-card:hover::before {
+    left: 100%;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-color: var(--glass-highlight);
+}
+
+.glass-input {
+    background: rgba(255, 255, 255, 0.05);
+    /* Lower opacity for dark mode */
+    border: 1px solid var(--glass-border);
+    color: var(--color-text);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-md);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+/* Primary Button */
+.glass-button {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border: none;
+    border-radius: var(--radius-md);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.glass-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+.glass-button:active {
+    transform: scale(0.98);
+}
+
+/* Secondary Button / Ghost Button variant - Adapted for Dark */
+.glass-button-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    /* Bright primary color on dark */
+    border-radius: var(--radius-md);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-button-secondary:hover {
+    background: var(--color-primary);
+    color: white;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+}

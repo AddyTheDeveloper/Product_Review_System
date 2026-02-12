@@ -1,0 +1,60 @@
+.inputContainer {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input {
+    width: 100%;
+    padding: 1.5rem 1rem 0.5rem;
+    /* Increased top padding for label space */
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-md);
+    color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.label {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+    transition: all 0.2s ease;
+    font-size: 1rem;
+}
+
+.active {
+    top: 50%;
+    transform: translateY(-140%);
+    font-size: 0.75rem;
+    color: var(--color-primary);
+}
+
+.toggleBtn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease;
+}
+
+.toggleBtn:hover {
+    color: var(--color-primary);
+}

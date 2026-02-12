@@ -1,0 +1,40 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+
+.blob {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    border-radius: 50%;
+    animation: spinBlob 1.5s linear infinite;
+    filter: blur(8px);
+}
+
+@keyframes spinBlob {
+    0% {
+        transform: scale(1) rotate(0deg);
+        border-radius: 50%;
+    }
+
+    50% {
+        transform: scale(0.8) rotate(180deg);
+        border-radius: 30%;
+    }
+
+    100% {
+        transform: scale(1) rotate(360deg);
+        border-radius: 50%;
+    }
+}

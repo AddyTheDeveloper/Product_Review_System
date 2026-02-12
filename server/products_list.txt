@@ -1,0 +1,6 @@
+Total Products Found: 5
+1. Name: "Iphone 17", Brand: "Apple Iphone 17", Reviews: 0, ID: 698c2917de5e5859330232f4
+2. Name: "Thar ROXX", Brand: "Mahindra", Reviews: 0, ID: 698c2d6aa6dac38495d9386c
+3. Name: "Soniq", Brand: "Boult", Reviews: 0, ID: 698c3a0d94a4c49aadf29b10
+4. Name: "OMEN 16 Gaming", Brand: "HP", Reviews: 0, ID: 698c5d73d221df1bf2c94f7f
+5. Name: "S21", Brand: "Samsung ", Reviews: 0, ID: 698e0d9cc9c1e3dbaeac79bb

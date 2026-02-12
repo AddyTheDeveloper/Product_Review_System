@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    gap: 2px;
+}
+
+.star {
+    color: var(--color-text-muted);
+    transition: all 0.2s ease;
+}
+
+.filled {
+    color: var(--color-warning);
+}
+
+.interactive {
+    cursor: pointer;
+}
+
+.interactive:hover {
+    transform: scale(1.2);
+}

@@ -1,0 +1,107 @@
+.container {
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.productSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    padding: 2rem;
+    margin-bottom: 4rem;
+}
+
+.image {
+    width: 100%;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.infoCol {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.ratingRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reviewCount {
+    color: var(--color-text-muted);
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+}
+
+.reviewsSection {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.sectionTitle {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.writeReview {
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.writeReview h3 {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.formGroup textarea {
+    width: 100%;
+    resize: vertical;
+}
+
+.reviewList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (max-width: 768px) {
+    .productSection {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}

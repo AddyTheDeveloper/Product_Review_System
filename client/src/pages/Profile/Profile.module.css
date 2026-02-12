@@ -1,0 +1,94 @@
+.container {
+    min-height: calc(100vh - 80px);
+    /* Adjust for navbar height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Blobs for specific page feel */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 300px;
+    height: 300px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.profileCard {
+    width: 100%;
+    max-width: 500px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 0.5rem;
+}
+
+.info {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.infoItem {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+}
+
+.value {
+    color: var(--color-text);
+    font-weight: 500;
+}
+
+.logoutBtn {
+    width: 100%;
+    background: rgba(239, 68, 68, 0.1);
+    /* Red tint */
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+    /* Red */
+    margin-top: 1rem;
+}
+
+.logoutBtn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.4);
+    transform: translateY(-2px);
+}

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 
 import styles from './ProductList.module.css';
@@ -67,16 +68,15 @@ const ProductList = () => {
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <h1 className="animate-fade-in">Latest Reviews</h1>
+                <h1 className="animate-fade-in" style={{ margin: 0 }}>Latest Reviews</h1>
 
-                <div className={styles.filterWrapper}>
+                <div className={styles.controls}>
                     <input
                         type="text"
-                        placeholder="Search reviews or products..."
+                        placeholder="Search reviews..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className={`glass-input ${styles.searchInput}`}
-                        style={{ marginBottom: '1rem', width: '100%', padding: '0.75rem 1rem', borderRadius: '12px', border: '1px solid var(--glass-border)', background: 'rgba(255, 255, 255, 0.05)', color: 'var(--color-text)', outline: 'none' }}
                     />
                     <select
                         value={category}
@@ -87,6 +87,9 @@ const ProductList = () => {
                             <option key={cat} value={cat}>{cat}</option>
                         ))}
                     </select>
+                    <Link to="/write-review" className="glass-button">
+                        Write a Review
+                    </Link>
                 </div>
             </div>
 

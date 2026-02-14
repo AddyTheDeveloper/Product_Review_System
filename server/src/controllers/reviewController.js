@@ -166,6 +166,38 @@ exports.getReviews = async (req, res) => {
     }
 };
 
+// @desc    Update review
+// @route   PUT /api/reviews/:id
+// @access  Private
+exports.updateReview = async (req, res) => {
+    try {
+        let review = await Review.findById(req.params.id);
+
+        if (!review) {
+            return res.status(404).json({ success: false, message: 'Review not found' });
+        }
+
+        // Make sure user is review owner or admin
+        if (review.user.toString() !== req.user.id && req.user.role !== 'admin') {
+            return res.status(401).json({ success: false, message: 'Not authorized to update review' });
+        }
+
+        review = await Review.findByIdAndUpdate(req.params.id, req.body, {
+            new: true,
+            runValidators: true
+        });
+
+        await Review.getAverageRating(review.product);
+
+        res.status(200).json({
+            success: true,
+            data: review
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+};
+
 // @desc    Delete review
 // @route   DELETE /api/reviews/:id
 // @access  Private/Admin
@@ -282,5 +314,25 @@ exports.addReviewStandalone = async (req, res) => {
     } catch (err) {
         console.error(err);
         res.status(400).json({ success: false, message: err.message });
+    }
+};
+
+// @desc    Get user reviews
+// @route   GET /api/reviews/myreviews
+// @access  Private
+exports.getMyReviews = async (req, res) => {
+    try {
+        const reviews = await Review.find({ user: req.user.id }).populate({
+            path: 'product',
+            select: 'name brand category productType image'
+        }).sort('-createdAt');
+
+        res.status(200).json({
+            success: true,
+            count: reviews.length,
+            data: reviews
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
     }
 };

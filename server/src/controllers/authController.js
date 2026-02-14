@@ -63,6 +63,42 @@ exports.getMe = async (req, res) => {
     }
 };
 
+// @desc    Update password
+// @route   PUT /api/auth/updatepassword
+// @access  Private
+exports.updatePassword = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('+password');
+
+        // Check current password
+        if (!(await user.matchPassword(req.body.currentPassword))) {
+            return res.status(401).json({ success: false, message: 'Invalid current password' });
+        }
+
+        user.password = req.body.newPassword;
+        await user.save();
+
+        sendTokenResponse(user, 200, res);
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
+// @desc    Log user out / clear cookie
+// @route   GET /api/auth/logout
+// @access  Private
+exports.logout = async (req, res) => {
+    res.cookie('token', 'none', {
+        expires: new Date(Date.now() + 10 * 1000),
+        httpOnly: true,
+    });
+
+    res.status(200).json({
+        success: true,
+        data: {},
+    });
+};
+
 // Helper function to get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();

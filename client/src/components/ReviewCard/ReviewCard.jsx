@@ -14,7 +14,9 @@ const ReviewCard = ({ review, delay }) => {
                 </div>
                 <div className={styles.userInfo}>
                     <span className={styles.userName}>{review.user.name}</span>
-                    <span className={styles.date}>{review.date}</span>
+                    <span className={styles.date}>
+                        {new Date(review.createdAt).toLocaleDateString()}
+                    </span>
                 </div>
                 <div className={styles.rating}>
                     <StarRating rating={review.rating} />

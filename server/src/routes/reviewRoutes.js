@@ -2,7 +2,10 @@ const express = require('express');
 const {
     getReviews,
     addReview,
-    addReviewStandalone
+    addReviewStandalone,
+    getMyReviews,
+    updateReview,
+    deleteReview
 } = require('../controllers/reviewController');
 
 const router = express.Router({ mergeParams: true });
@@ -13,6 +16,13 @@ router
     .route('/')
     .get(getReviews)
     .post(protect, authorize('user', 'admin'), addReview);
+
+router.get('/myreviews', protect, getMyReviews);
+router
+    .route('/:id')
+    .get(getReviews) // Optional: getting a single review if needed, but not implemented in controller yet
+    .put(protect, updateReview)
+    .delete(protect, deleteReview);
 
 router.post('/standalone', protect, authorize('user', 'admin'), addReviewStandalone);
 

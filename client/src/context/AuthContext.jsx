@@ -13,16 +13,19 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [token, setToken] = useState(localStorage.getItem('token'));
+
     useEffect(() => {
         // Check if user is logged in on mount
         const checkLoggedIn = async () => {
             const storedUser = localStorage.getItem('user');
-            const token = localStorage.getItem('token');
+            const storedToken = localStorage.getItem('token');
 
-            if (storedUser && token) {
+            if (storedUser && storedToken) {
                 setUser(JSON.parse(storedUser));
+                setToken(storedToken);
                 // Set default headers
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+                axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
             }
             setLoading(false);
         };
@@ -40,6 +43,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(user));
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+            setToken(token);
             setUser(user);
             return { success: true };
         } catch (err) {
@@ -59,6 +63,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(user));
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
+            setToken(token);
             setUser(user);
             return { success: true };
         } catch (err) {
@@ -72,6 +77,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         delete axios.defaults.headers.common['Authorization'];
+        setToken(null);
         setUser(null);
     }, []);
 
@@ -79,13 +85,14 @@ export const AuthProvider = ({ children }) => {
 
     const value = useMemo(() => ({
         user,
+        token,
         loading,
         error,
         register,
         login,
         logout,
         isAdmin
-    }), [user, loading, error, register, login, logout, isAdmin]);
+    }), [user, token, loading, error, register, login, logout, isAdmin]);
 
     return (
         <AuthContext.Provider value={value}>

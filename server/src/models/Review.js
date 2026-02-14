@@ -21,6 +21,12 @@ const reviewSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please add a comment'],
     },
+    price: {
+        type: Number,
+        required: [true, 'Please add the price you paid'],
+        min: [0, 'Price must be positive'],
+        default: 0
+    },
     createdAt: {
         type: Date,
         default: Date.now,

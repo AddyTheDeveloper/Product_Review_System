@@ -218,7 +218,7 @@
 }
 
 .filterSelect option {
-    background-color: #1a1a1a;
+    background-color: var(--color-surface);
     color: var(--color-text);
     padding: 0.5rem;
 }

@@ -302,7 +302,8 @@ exports.addReviewStandalone = async (req, res) => {
             user: userId,
             product: product._id,
             rating,
-            comment
+            comment,
+            price: req.body.price
         });
 
         res.status(201).json({

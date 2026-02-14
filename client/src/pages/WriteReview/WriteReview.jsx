@@ -11,6 +11,7 @@ const WriteReview = () => {
         productName: '',
         productType: '',
         review: '',
+        price: '',
         rating: 0
     });
     const [loading, setLoading] = useState(false);
@@ -41,6 +42,7 @@ const WriteReview = () => {
                 productName: formData.productName,
                 productType: formData.productType,
                 rating: formData.rating,
+                price: formData.price,
                 comment: formData.review
             });
 
@@ -51,6 +53,7 @@ const WriteReview = () => {
                 productName: '',
                 productType: '',
                 review: '',
+                price: '',
                 rating: 0
             });
         } catch (error) {
@@ -80,16 +83,16 @@ const WriteReview = () => {
                 )}
 
                 <form onSubmit={handleSubmit} className={styles.form}>
-                    <div className={styles.formGroup}>
-                        <label className={styles.label}>Category</label>
-                        <select
+                    <div className={styles.row}>
+                        <Input
+                            label="Category"
+                            type="select"
                             name="category"
                             value={formData.category}
                             onChange={handleChange}
-                            className={`glass-input ${styles.select}`}
                             required
                         >
-                            <option value="" disabled>Select Category</option>
+                            <option value="" disabled></option>
                             <option value="Technology">Technology</option>
                             <option value="Fashion">Fashion</option>
                             <option value="Personal Care">Personal Care</option>
@@ -98,24 +101,39 @@ const WriteReview = () => {
                             <option value="Accessories">Accessories</option>
                             <option value="Vehicles">Vehicles</option>
                             <option value="Other">Other</option>
-                        </select>
+                        </Input>
+
+                        <Input
+                            label="Product Type"
+                            name="productType"
+                            value={formData.productType}
+                            onChange={handleChange}
+                            required
+                        />
                     </div>
 
-                    <Input
-                        label="Product Type"
-                        name="productType"
-                        value={formData.productType}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className={styles.row}>
+                        <Input
+                            label="Brand Name"
+                            name="brand"
+                            value={formData.brand}
+                            onChange={handleChange}
+                            required
+                        />
 
-                    <Input
-                        label="Brand Name"
-                        name="brand"
-                        value={formData.brand}
-                        onChange={handleChange}
-                        required
-                    />
+                        <Input
+                            label="Price Paid"
+                            type="number"
+                            name="price"
+                            value={formData.price}
+                            onChange={handleChange}
+                            startAdornment="₹"
+                            placeholder="0.00"
+                            min="0"
+                            onKeyDown={(e) => e.key === '-' && e.preventDefault()}
+                            required
+                        />
+                    </div>
 
                     <Input
                         label="Product Name"

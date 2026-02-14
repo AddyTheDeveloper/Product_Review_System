@@ -7,6 +7,7 @@ const EditReviewModal = ({ review, onClose, onUpdate }) => {
     const { token } = useAuth();
     const [rating, setRating] = useState(review.rating);
     const [comment, setComment] = useState(review.comment);
+    const [price, setPrice] = useState(review.price || '');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -24,7 +25,8 @@ const EditReviewModal = ({ review, onClose, onUpdate }) => {
 
             const res = await axios.put(`http://localhost:5000/api/reviews/${review._id}`, {
                 rating,
-                comment
+                comment,
+                price
             }, config);
 
             onUpdate(res.data.data);
@@ -108,6 +110,41 @@ const EditReviewModal = ({ review, onClose, onUpdate }) => {
                                     <Star size={32} fill={star <= rating ? "currentColor" : "none"} />
                                 </button>
                             ))}
+                        </div>
+                    </div>
+
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <label style={{ display: 'block', marginBottom: '0.5rem', fontSize: '0.9rem', color: 'rgba(255,255,255,0.8)' }}>
+                            Price Paid (₹)
+                        </label>
+                        <div style={{ position: 'relative' }}>
+                            <span style={{
+                                position: 'absolute',
+                                left: '1rem',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                color: 'rgba(255,255,255,0.6)',
+                                zIndex: 1
+                            }}>₹</span>
+                            <input
+                                type="number"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                style={{
+                                    width: '100%',
+                                    padding: '1rem',
+                                    paddingLeft: '2.5rem',
+                                    borderRadius: '12px',
+                                    background: 'rgba(0,0,0,0.2)',
+                                    border: '1px solid rgba(255,255,255,0.1)',
+                                    color: 'white',
+                                    fontSize: '1rem',
+                                    outline: 'none'
+                                }}
+                                placeholder="0.00"
+                                min="0"
+                                onKeyDown={(e) => e.key === '-' && e.preventDefault()}
+                            />
                         </div>
                     </div>
 

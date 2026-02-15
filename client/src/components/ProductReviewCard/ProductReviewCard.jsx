@@ -22,6 +22,11 @@ const ProductReviewCard = ({ review, delay }) => {
                     <span className={styles.categoryBadge}>
                         {review.product?.category || 'General'}
                     </span>
+                    {review.price > 0 && (
+                        <span className={styles.priceTag}>
+                            ₹{review.price}
+                        </span>
+                    )}
                 </div>
                 <div className={styles.ratingWrapper}>
                     <StarRating rating={review.rating} />

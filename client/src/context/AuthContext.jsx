@@ -29,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
                     setUser(res.data.data);
                     setToken(storedToken);
-                } catch (err) {
+                } catch {
                     // Token invalid or expired
                     localStorage.removeItem('token');
                     localStorage.removeItem('user');

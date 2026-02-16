@@ -23,7 +23,7 @@ const EditReviewModal = ({ review, onClose, onUpdate }) => {
                 }
             };
 
-            const res = await axios.put(`http://localhost:5000/api/reviews/${review._id}`, {
+            const res = await axios.put(`/api/reviews/${review._id}`, {
                 rating,
                 comment,
                 price

@@ -27,7 +27,12 @@ exports.getReviews = async (req, res) => {
             let queryStr = JSON.stringify(reqQuery);
             queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
-            let parsedQuery = JSON.parse(queryStr);
+            let parsedQuery;
+            try {
+                parsedQuery = JSON.parse(queryStr);
+            } catch (e) {
+                parsedQuery = {};
+            }
 
             // Search functionality (Product Name, Brand, Review Comment)
             // This is complex because Review doesn't have product name/brand directly.

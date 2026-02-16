@@ -42,7 +42,7 @@ const AccountSettings = ({ styles }) => {
                 }
             };
 
-            await axios.put('http://localhost:5000/api/auth/updatepassword', {
+            await axios.put('/api/auth/updatepassword', {
                 currentPassword: passwords.currentPassword,
                 newPassword: passwords.newPassword
             }, config);
@@ -62,7 +62,7 @@ const AccountSettings = ({ styles }) => {
             // Note: Axios might need withCredentials: true if your backend serves cookies for auth
             // But here we might just be using the token from context.
             // If the backend sets a cookie, we should ideally call the logout endpoint.
-            await axios.get('http://localhost:5000/api/auth/logout');
+            await axios.get('/api/auth/logout');
             logout();
             navigate('/');
         } catch (err) {

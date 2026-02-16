@@ -39,7 +39,7 @@ const Profile = () => {
                 // If viewing another user, fetch their details
                 if (userId && userId !== authUser?._id) {
                     try {
-                        const userRes = await axios.get(`http://localhost:5000/api/admin/users/${userId}`, config);
+                        const userRes = await axios.get(`/api/admin/users/${userId}`, config);
                         if (userRes.data.success) {
                             currentUserData = userRes.data.data;
                         }
@@ -55,7 +55,7 @@ const Profile = () => {
 
                 // Fetch reviews for the profile user
                 // If it's own profile, use /myreviews, else use public filter
-                let reviewsUrl = 'http://localhost:5000/api/reviews/myreviews';
+                let reviewsUrl = '/api/reviews/myreviews';
 
                 // If we have a general review search endpoint that filters by user, we should use that for others.
                 // However, based on reviewController, we can fitler by user in general GetReviews?
@@ -75,7 +75,7 @@ const Profile = () => {
                 // `Review.find(reqQuery)` will work if `user` is in the schema!
 
                 if (!isOwnProfile) {
-                    reviewsUrl = `http://localhost:5000/api/reviews?user=${userId}`;
+                    reviewsUrl = `/api/reviews?user=${userId}`;
                 }
 
                 const { data } = await axios.get(reviewsUrl, isOwnProfile ? config : {});
@@ -109,7 +109,7 @@ const Profile = () => {
                 };
                 // Admin can delete any review, User can delete own.
                 // The endpoint `api/reviews/:id` supports both (admin check in controller).
-                await axios.delete(`http://localhost:5000/api/reviews/${id}`, config);
+                await axios.delete(`/api/reviews/${id}`, config);
                 setReviews(reviews.filter(review => review._id !== id));
             } catch (err) {
                 alert(err.response?.data?.message || 'Failed to delete review');

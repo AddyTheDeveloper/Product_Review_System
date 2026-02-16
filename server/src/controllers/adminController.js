@@ -67,8 +67,12 @@ exports.getAdminStats = async (req, res) => {
         const totalProducts = await Product.countDocuments();
 
         // Calculate average rating across all reviews
-        const reviews = await Review.find();
-        const avgRating = reviews.reduce((acc, item) => acc + item.rating, 0) / reviews.length || 0;
+        // Calculate average rating and distribution
+        const reviews = await Review.find().select('rating');
+
+        const avgRating = reviews.length > 0
+            ? reviews.reduce((acc, item) => acc + item.rating, 0) / reviews.length
+            : 0;
 
         // Rating distribution
         const ratingDistribution = [0, 0, 0, 0, 0]; // 1 to 5 stars

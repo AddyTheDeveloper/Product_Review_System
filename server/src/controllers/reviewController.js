@@ -5,10 +5,6 @@ const Product = require('../models/Product');
 // @route   GET /api/reviews
 // @route   GET /api/products/:productId/reviews
 // @access  Public
-// @desc    Get reviews
-// @route   GET /api/reviews
-// @route   GET /api/products/:productId/reviews
-// @access  Public
 exports.getReviews = async (req, res) => {
     try {
         let query;
@@ -23,7 +19,6 @@ exports.getReviews = async (req, res) => {
             // General fetch (e.g. for Admin or Global Search) with filtering
             const reqQuery = { ...req.query };
 
-            // Fields to exclude from filtering
             // Fields to exclude from filtering
             const removeFields = ['select', 'sort', 'page', 'limit', 'search', 'category', 'brand', 'productType'];
             removeFields.forEach(param => delete reqQuery[param]);
@@ -46,22 +41,26 @@ exports.getReviews = async (req, res) => {
             if (req.query.search || req.query.category || req.query.brand || req.query.productType) {
                 const productQuery = {};
 
+                // Helper to escape regex special characters
+                const escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+
                 // Only apply product-specific text search if we are looking for product attributes
                 if (req.query.search) {
+                    const regex = new RegExp(escapeRegex(req.query.search), 'i');
                     productQuery.$or = [
-                        { name: { $regex: req.query.search, $options: 'i' } },
-                        { brand: { $regex: req.query.search, $options: 'i' } },
-                        { productType: { $regex: req.query.search, $options: 'i' } }
+                        { name: { $regex: regex } },
+                        { brand: { $regex: regex } },
+                        { productType: { $regex: regex } }
                     ];
                 }
 
                 // Case-insensitive category match
                 if (req.query.category && req.query.category !== 'All') {
-                    productQuery.category = { $regex: new RegExp(`^${req.query.category}$`, 'i') };
+                    productQuery.category = { $regex: new RegExp(`^${escapeRegex(req.query.category)}$`, 'i') };
                 }
 
-                if (req.query.brand) productQuery.brand = { $regex: new RegExp(`^${req.query.brand}$`, 'i') };
-                if (req.query.productType) productQuery.productType = { $regex: new RegExp(`^${req.query.productType}$`, 'i') };
+                if (req.query.brand) productQuery.brand = { $regex: new RegExp(`^${escapeRegex(req.query.brand)}$`, 'i') };
+                if (req.query.productType) productQuery.productType = { $regex: new RegExp(`^${escapeRegex(req.query.productType)}$`, 'i') };
 
                 // Find matching products
                 const products = await Product.find(productQuery).select('_id');
@@ -90,7 +89,7 @@ exports.getReviews = async (req, res) => {
                     const searchCondition = {
                         $or: [
                             { product: { $in: productIds } },
-                            { comment: { $regex: req.query.search, $options: 'i' } }
+                            { comment: { $regex: new RegExp(escapeRegex(req.query.search), 'i') } }
                         ]
                     };
 
@@ -103,7 +102,7 @@ exports.getReviews = async (req, res) => {
 
                         // Let's refetch ALL products in this category to constrain the comment search
                         const allCategoryProducts = await Product.find({
-                            category: { $regex: new RegExp(`^${req.query.category}$`, 'i') }
+                            category: { $regex: new RegExp(`^${escapeRegex(req.query.category)}$`, 'i') }
                         }).select('_id');
                         const categoryProductIds = allCategoryProducts.map(p => p._id);
 
@@ -259,10 +258,13 @@ exports.addReviewStandalone = async (req, res) => {
         const { productName, brand, category, productType, rating, comment } = req.body;
         const userId = req.user.id;
 
+        // Helper to escape regex special characters
+        const escapeRegex = (text) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+
         // 1. Find or Create Product
         let product = await Product.findOne({
-            name: { $regex: new RegExp(`^${productName}$`, 'i') },
-            brand: { $regex: new RegExp(`^${brand}$`, 'i') }
+            name: { $regex: new RegExp(`^${escapeRegex(productName)}$`, 'i') },
+            brand: { $regex: new RegExp(`^${escapeRegex(brand)}$`, 'i') }
         });
 
         if (!product) {

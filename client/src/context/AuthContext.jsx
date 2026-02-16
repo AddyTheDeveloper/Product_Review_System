@@ -18,14 +18,25 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         // Check if user is logged in on mount
         const checkLoggedIn = async () => {
-            const storedUser = localStorage.getItem('user');
             const storedToken = localStorage.getItem('token');
 
-            if (storedUser && storedToken) {
-                setUser(JSON.parse(storedUser));
-                setToken(storedToken);
-                // Set default headers
-                axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+            if (storedToken) {
+                try {
+                    // Set default headers to include token before request
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
+
+                    const res = await axios.get('/api/auth/me');
+
+                    setUser(res.data.data);
+                    setToken(storedToken);
+                } catch (err) {
+                    // Token invalid or expired
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    delete axios.defaults.headers.common['Authorization'];
+                    setUser(null);
+                    setToken(null);
+                }
             }
             setLoading(false);
         };

@@ -1,6 +1,7 @@
 const express = require('express');
 const {
     getReviews,
+    getReview,
     addReview,
     addReviewStandalone,
     getMyReviews,
@@ -20,7 +21,7 @@ router
 router.get('/myreviews', protect, getMyReviews);
 router
     .route('/:id')
-    .get(getReviews) // Optional: getting a single review if needed, but not implemented in controller yet
+    .get(getReview)
     .put(protect, updateReview)
     .delete(protect, deleteReview);
 

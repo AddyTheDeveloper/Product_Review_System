@@ -165,6 +165,32 @@ exports.getReviews = async (req, res) => {
     }
 };
 
+// @desc    Get single review
+// @route   GET /api/reviews/:id
+// @access  Public
+exports.getReview = async (req, res) => {
+    try {
+        const review = await Review.findById(req.params.id).populate({
+            path: 'product',
+            select: 'name brand category productType image'
+        }).populate({
+            path: 'user',
+            select: 'name'
+        });
+
+        if (!review) {
+            return res.status(404).json({ success: false, message: 'Review not found' });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: review
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+};
+
 // @desc    Update review
 // @route   PUT /api/reviews/:id
 // @access  Private

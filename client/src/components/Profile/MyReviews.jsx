@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Star, Edit2, Trash2, Calendar, Tag, ShoppingBag } from 'lucide-react';
 import EditReviewModal from './EditReviewModal';
 
-const MyReviews = ({ reviews, loading, error, onDelete, styles, onUpdate }) => {
+const MyReviews = ({ reviews, loading, error, onDelete, styles, onUpdate, readOnly = false }) => {
     const [editingReview, setEditingReview] = useState(null);
 
     const handleUpdateSuccess = (updatedReview) => {
@@ -53,23 +53,25 @@ const MyReviews = ({ reviews, loading, error, onDelete, styles, onUpdate }) => {
                                         </span>
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                    <button
-                                        className={styles.deleteBtn}
-                                        style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
-                                        onClick={() => setEditingReview(review)}
-                                        title="Edit Review"
-                                    >
-                                        <Edit2 size={18} />
-                                    </button>
-                                    <button
-                                        className={styles.deleteBtn}
-                                        onClick={() => onDelete(review._id)}
-                                        title="Delete Review"
-                                    >
-                                        <Trash2 size={18} />
-                                    </button>
-                                </div>
+                                {!readOnly && (
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <button
+                                            className={styles.deleteBtn}
+                                            style={{ borderColor: 'rgba(255,255,255,0.3)', color: 'white' }}
+                                            onClick={() => setEditingReview(review)}
+                                            title="Edit Review"
+                                        >
+                                            <Edit2 size={18} />
+                                        </button>
+                                        <button
+                                            className={styles.deleteBtn}
+                                            onClick={() => onDelete(review._id)}
+                                            title="Delete Review"
+                                        >
+                                            <Trash2 size={18} />
+                                        </button>
+                                    </div>
+                                )}
                             </div>
 
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1rem' }}>

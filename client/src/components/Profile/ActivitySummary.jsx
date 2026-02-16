@@ -1,6 +1,18 @@
 import React from 'react';
 import { BarChart2, Star, Tag } from 'lucide-react';
 
+const StatCard = ({ icon: Icon, label, value, color, styles }) => ( // eslint-disable-line no-unused-vars
+    <div className={styles.statCard}>
+        <div className={styles.statIconWrapper} style={{ backgroundColor: color }}>
+            <Icon size={24} color="white" />
+        </div>
+        <div className={styles.statInfo}>
+            <span className={styles.statLabel}>{label}</span>
+            <span className={styles.statValue}>{value}</span>
+        </div>
+    </div>
+);
+
 const ActivitySummary = ({ reviews, styles }) => {
     // Calculate stats
     const totalReviews = reviews.length;
@@ -19,17 +31,7 @@ const ActivitySummary = ({ reviews, styles }) => {
         ? Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0][0]
         : 'N/A';
 
-    const StatCard = ({ icon: Icon, label, value, color }) => (
-        <div className={styles.statCard}>
-            <div className={styles.statIconWrapper} style={{ backgroundColor: color }}>
-                <Icon size={24} color="white" />
-            </div>
-            <div className={styles.statInfo}>
-                <span className={styles.statLabel}>{label}</span>
-                <span className={styles.statValue}>{value}</span>
-            </div>
-        </div>
-    );
+
 
     return (
         <div className={styles.statsGrid}>
@@ -38,18 +40,21 @@ const ActivitySummary = ({ reviews, styles }) => {
                 label="Total Reviews"
                 value={totalReviews}
                 color="rgba(59, 130, 246, 0.5)"
+                styles={styles}
             />
             <StatCard
                 icon={Star}
                 label="Average Rating"
                 value={avgRating}
                 color="rgba(234, 179, 8, 0.5)"
+                styles={styles}
             />
             <StatCard
                 icon={Tag}
                 label="Favorite Category"
                 value={mostReviewedCategory}
                 color="rgba(168, 85, 247, 0.5)"
+                styles={styles}
             />
         </div>
     );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Package, MessageSquare, Users, BarChart2, Trash2, Search } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import StarRating from '../../components/StarRating/StarRating';
 import styles from './AdminDashboard.module.css';
 
@@ -270,8 +271,16 @@ const AdminDashboard = () => {
                             <tbody>
                                 {users.map(user => (
                                     <tr key={user._id}>
-                                        <td>{user.name}</td>
-                                        <td>{user.email}</td>
+                                        <td>
+                                            <Link to={`/profile/${user._id}`} style={{ color: 'inherit', textDecoration: 'none' }} className="hover:underline">
+                                                {user.name}
+                                            </Link>
+                                        </td>
+                                        <td>
+                                            <Link to={`/profile/${user._id}`} style={{ color: 'inherit', textDecoration: 'none', opacity: 0.8 }}>
+                                                {user.email}
+                                            </Link>
+                                        </td>
                                         <td>
                                             <span style={{
                                                 padding: '0.25rem 0.5rem',

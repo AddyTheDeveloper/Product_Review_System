@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUsers, deleteUser, getAdminStats } = require('../controllers/adminController');
+const { getUsers, getUserById, deleteUser, getAdminStats } = require('../controllers/adminController');
 const { getReviews, deleteReview } = require('../controllers/reviewController'); // We'll add filter support to getReviews and implement deleteReview
 const { protect, authorize } = require('../middleware/authMiddleware');
 
@@ -13,6 +13,7 @@ router.route('/users')
     .get(getUsers);
 
 router.route('/users/:id')
+    .get(getUserById)
     .delete(deleteUser);
 
 router.route('/stats')

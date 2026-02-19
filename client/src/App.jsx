@@ -9,7 +9,10 @@ import ProductDetails from './pages/ProductDetails/ProductDetails';
 import WriteReview from './pages/WriteReview/WriteReview';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import Profile from './pages/Profile/Profile';
+import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
+import TermsOfService from './pages/Legal/TermsOfService';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import Footer from './components/Footer/Footer';
 import './index.css';
 
 import { AuthProvider } from './context/AuthContext';
@@ -19,7 +22,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Navbar />
-        <div style={{ paddingTop: '80px' }}> {/* Push content down for fixed navbar */}
+        <div style={{ minHeight: 'calc(100vh - 80px)', paddingTop: '80px' }}> {/* Push content down for fixed navbar */}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<ProductList />} />
@@ -42,10 +45,14 @@ function App() {
                 <Profile />
               </ProtectedRoute>
             } />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-service" element={<TermsOfService />} />
           </Routes>
         </div>
+        <Footer />
       </Router>
     </AuthProvider>
+
   );
 }
 

@@ -1,0 +1,77 @@
+.footer {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--glass-border);
+  box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
+
+  /* Layout & Spacing for "Thin" look */
+  padding: 0.8rem 1rem;
+  margin-top: auto;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  /* Try row layout for thinner look if possible, or compact column */
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* If screen is small, stack them, but keep it tight */
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.footer-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.footer-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  /* Slightly smaller text */
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.footer-link:hover {
+  color: var(--color-primary);
+  text-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+.separator {
+  color: var(--glass-border);
+  font-size: 0.75rem;
+}
+
+.footer-social .footer-link {
+  display: flex;
+  align-items: center;
+}
+
+.footer-copyright {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+}

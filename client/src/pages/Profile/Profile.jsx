@@ -36,10 +36,11 @@ const Profile = () => {
 
                 let currentUserData = authUser;
 
-                // If viewing another user, fetch their details
+                // If viewing another user, fetch their details from public endpoint
                 if (userId && userId !== authUser?._id) {
                     try {
-                        const userRes = await axios.get(`/api/admin/users/${userId}`, config);
+                        // Use public endpoint instead of admin one
+                        const userRes = await axios.get(`/api/users/${userId}`);
                         if (userRes.data.success) {
                             currentUserData = userRes.data.data;
                         }

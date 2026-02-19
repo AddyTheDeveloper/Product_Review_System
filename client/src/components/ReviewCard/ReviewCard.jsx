@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 import styles from './ReviewCard.module.css';
 
@@ -13,7 +14,9 @@ const ReviewCard = ({ review, delay }) => {
                     {review.user.name.charAt(0)}
                 </div>
                 <div className={styles.userInfo}>
-                    <span className={styles.userName}>{review.user.name}</span>
+                    <Link to={`/profile/${review.user._id}`} className={styles.userLink}>
+                        <span className={styles.userName}>{review.user.name}</span>
+                    </Link>
                     <span className={styles.date}>
                         {new Date(review.createdAt).toLocaleDateString()}
                     </span>

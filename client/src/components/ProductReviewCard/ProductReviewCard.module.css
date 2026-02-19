@@ -66,7 +66,8 @@
     word-break: break-word;
     max-height: 150px;
     overflow-y: auto;
-    padding-right: 5px; /* Prevent text hiding behind scrollbar */
+    padding-right: 5px;
+    /* Prevent text hiding behind scrollbar */
 }
 
 /* Custom Scrollbar for comment section */
@@ -137,6 +138,19 @@
 .userName {
     font-weight: 500;
     color: var(--color-text);
+}
+
+.userLink {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.userLink:hover .userName {
+    color: var(--color-primary);
+    text-decoration: underline;
 }
 
 .date {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 import styles from './ProductReviewCard.module.css';
 
@@ -48,12 +49,14 @@ const ProductReviewCard = ({ review, delay }) => {
 
             <div className={styles.footer}>
                 <div className={styles.userInfo}>
-                    <div className={styles.avatar}>
-                        {review.user?.name?.charAt(0).toUpperCase()}
-                    </div>
-                    <span className={styles.userName}>
-                        {review.user?.name || 'Anonymous'}
-                    </span>
+                    <Link to={`/profile/${review.user?._id}`} className={styles.userLink}>
+                        <div className={styles.avatar}>
+                            {review.user?.name?.charAt(0).toUpperCase()}
+                        </div>
+                        <span className={styles.userName}>
+                            {review.user?.name || 'Anonymous'}
+                        </span>
+                    </Link>
                 </div>
                 <span className={styles.date}>
                     {new Date(review.createdAt).toLocaleDateString()}

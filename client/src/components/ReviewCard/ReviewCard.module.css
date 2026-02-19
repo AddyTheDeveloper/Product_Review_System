@@ -41,6 +41,17 @@
     color: var(--color-text);
 }
 
+.userLink {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+
+.userLink:hover .userName {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+
 .date {
     font-size: 0.8rem;
     color: var(--color-text-muted);

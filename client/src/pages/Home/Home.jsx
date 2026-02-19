@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReviewCard from '../../components/ReviewCard/ReviewCard';
+import Footer from '../../components/Footer/Footer';
 import styles from './Home.module.css';
 
 const Home = () => {
@@ -140,6 +141,7 @@ const Home = () => {
             {/* Decorative Elements */}
             <div className={`${styles.blob} ${styles.blob1}`}></div>
             <div className={`${styles.blob} ${styles.blob2}`}></div>
+            <Footer />
         </div>
     );
 };

@@ -10,6 +10,7 @@
   margin-top: auto;
   color: var(--color-text);
   text-align: center;
+  width: 100%;
 }
 
 .footer-content {

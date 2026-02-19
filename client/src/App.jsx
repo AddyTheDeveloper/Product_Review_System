@@ -12,7 +12,6 @@ import Profile from './pages/Profile/Profile';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import TermsOfService from './pages/Legal/TermsOfService';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
-import Footer from './components/Footer/Footer';
 import './index.css';
 
 import { AuthProvider } from './context/AuthContext';
@@ -49,7 +48,6 @@ function App() {
             <Route path="/terms-of-service" element={<TermsOfService />} />
           </Routes>
         </div>
-        <Footer />
       </Router>
     </AuthProvider>
 

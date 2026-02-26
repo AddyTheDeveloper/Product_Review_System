@@ -134,10 +134,10 @@ const AdminDashboard = () => {
                             <h4>Total Users</h4>
                             <span className={styles.statValue}>{stats.totalUsers}</span>
                         </div>
-                        <div className={`glass-card ${styles.statCard}`}>
+                        <Link to="/admin/products" className={`glass-card ${styles.statCard}`} style={{ textDecoration: 'none', color: 'inherit', cursor: 'pointer' }}>
                             <h4>Total Products</h4>
                             <span className={styles.statValue}>{stats.totalProducts}</span>
-                        </div>
+                        </Link>
                         <div className={`glass-card ${styles.statCard}`}>
                             <h4>Total Reviews</h4>
                             <span className={styles.statValue}>{stats.totalReviews}</span>

@@ -14,6 +14,7 @@ const ProductDetails = () => {
 
     // Review form state
     const [rating, setRating] = useState(0);
+    const [price, setPrice] = useState('');
     const [comment, setComment] = useState('');
 
     useEffect(() => {
@@ -39,11 +40,13 @@ const ProductDetails = () => {
         try {
             await axios.post(`/api/products/${id}/reviews`, {
                 rating,
+                price: Number(price),
                 comment
             });
 
             // Reset form
             setRating(0);
+            setPrice('');
             setComment('');
 
             // Refresh product data
@@ -77,14 +80,22 @@ const ProductDetails = () => {
                     />
                 </div>
                 <div className={styles.infoCol}>
-                    <h1 className={styles.title}>{product.name}</h1>
+                    <div className={styles.headerInfo}>
+                        <span className={styles.brandTag}>{product.brand}</span>
+                        <h1 className={styles.title}>{product.name}</h1>
+                        <span className={styles.typeTag}>{product.productType || 'General'}</span>
+                    </div>
+
                     <div className={styles.meta}>
-                        <span className={styles.price}>${product.price}</span>
+                        <span className={styles.price}>₹{product.price}</span>
                         <div className={styles.ratingRow}>
                             <StarRating rating={product.rating} />
                             <span className={styles.reviewCount}>({product.reviewCount} reviews)</span>
                         </div>
                     </div>
+
+                    <div className={styles.divider}></div>
+
                     <p className={styles.description}>{product.description}</p>
                 </div>
             </div>
@@ -98,6 +109,19 @@ const ProductDetails = () => {
                         <div className={styles.formGroup}>
                             <label>Your Rating</label>
                             <StarRating rating={rating} interactive onRate={setRating} />
+                        </div>
+
+                        <div className={styles.formGroup}>
+                            <label>Price Paid (₹)</label>
+                            <input
+                                type="number"
+                                className="glass-input"
+                                placeholder="How much did you pay?"
+                                value={price}
+                                onChange={(e) => setPrice(e.target.value)}
+                                min="0"
+                                required
+                            />
                         </div>
 
                         <div className={styles.formGroup}>

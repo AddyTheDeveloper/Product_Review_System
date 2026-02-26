@@ -8,6 +8,7 @@ import ProductList from './pages/Products/ProductList';
 import ProductDetails from './pages/ProductDetails/ProductDetails';
 import WriteReview from './pages/WriteReview/WriteReview';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminProducts from './pages/Admin/AdminProducts';
 import Profile from './pages/Profile/Profile';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import TermsOfService from './pages/Legal/TermsOfService';
@@ -37,6 +38,11 @@ function App() {
             <Route path="/admin" element={
               <ProtectedRoute adminOnly={true}>
                 <AdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/products" element={
+              <ProtectedRoute adminOnly={true}>
+                <AdminProducts />
               </ProtectedRoute>
             } />
             <Route path="/profile/:userId?" element={

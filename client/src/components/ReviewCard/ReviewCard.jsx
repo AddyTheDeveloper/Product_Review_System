@@ -2,8 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 import styles from './ReviewCard.module.css';
+import { getConfidenceScore, highlightText, confidenceLabels } from '../../utils/reviewUtils';
 
 const ReviewCard = ({ review, delay }) => {
+    const confidenceScore = getConfidenceScore(review.comment, review.rating);
+
     return (
         <div
             className={`glass-panel ${styles.card} animate-fade-in`}
@@ -22,11 +25,40 @@ const ReviewCard = ({ review, delay }) => {
                     </span>
                 </div>
                 <div className={styles.rating}>
-                    <StarRating rating={review.rating} />
+                    <div className={styles.brandRow}>
+                        {review.product?.brand && (
+                            <span className={styles.brandBadge}>{review.product.brand}</span>
+                        )}
+                        <StarRating rating={review.rating} />
+                    </div>
+                    {review.price > 0 && (
+                        <div style={{ marginTop: '0.5rem', textAlign: 'right' }}>
+                            <span className={styles.priceTag}>₹{review.price}</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
-            <p className={styles.comment}>{review.comment}</p>
+            <div className={styles.navigationRow}>
+                <Link to="/products" className={styles.browseLink}>
+                    &larr; Browse All Reviews
+                </Link>
+            </div>
+
+            <div className={styles.confidenceContainer}>
+                <span className={styles.confidenceLabel}>Confidence: </span>
+                <div className={styles.meter}>
+                    {[1, 2, 3, 4, 5].map((step) => (
+                        <span
+                            key={step}
+                            className={`${styles.dot} ${step <= confidenceScore ? styles.active : ''}`}
+                        ></span>
+                    ))}
+                </div>
+                <span className={styles.confidenceText}>({confidenceLabels[confidenceScore - 1]})</span>
+            </div>
+
+            <p className={styles.comment}>{highlightText(review.comment, styles)}</p>
         </div>
     );
 };

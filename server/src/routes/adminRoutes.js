@@ -1,5 +1,5 @@
 const express = require('express');
-const { getUsers, getUserById, deleteUser, getAdminStats } = require('../controllers/adminController');
+const { getUsers, getUserById, deleteUser, getAdminStats, getProducts: getAdminProducts } = require('../controllers/adminController');
 const { getReviews, deleteReview } = require('../controllers/reviewController'); // We'll add filter support to getReviews and implement deleteReview
 const { protect, authorize } = require('../middleware/authMiddleware');
 
@@ -18,6 +18,9 @@ router.route('/users/:id')
 
 router.route('/stats')
     .get(getAdminStats);
+
+router.route('/products')
+    .get(getAdminProducts);
 
 // Review management endpoints for Admin
 // We can reuse getReviews but maybe we want a specific admin one if logic differs too much.

@@ -339,6 +339,12 @@ exports.addReviewStandalone = async (req, res) => {
             price: req.body.price
         });
 
+        // Set product price to the review price if it was 0 (first review)
+        if (product.price === 0 && req.body.price > 0) {
+            product.price = req.body.price;
+            await product.save();
+        }
+
         res.status(201).json({
             success: true,
             data: review,
